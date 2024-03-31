@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 public class FileController {
     @Resource
     FileService fileService;
+
     @PostMapping("/upload")
     public ResultJson<?> uploadFolder(@RequestParam("folderName") String folderName,MultipartFile file) throws IOException {
         String originalFileName = file.getOriginalFilename();
@@ -25,10 +26,16 @@ public class FileController {
             File dbFile = new File();
             dbFile.setUrl(folderName);
             dbFile.setDescription(fileContent);
+            dbFile.setName(folderName);
             fileService.save(dbFile);
         }
         FileUtil.saveMultiFile("D:/upload/"+folderName, file);
         return ResultJson.ok();
+    }
+
+    @GetMapping
+    public ResultJson<?> getAll() {
+        return ResultJson.ok(fileService.list());
     }
 
 }
