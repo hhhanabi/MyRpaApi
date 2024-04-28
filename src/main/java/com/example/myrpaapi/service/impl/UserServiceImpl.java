@@ -28,8 +28,8 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
         }
 
 //        List<Role> roles = List.of(new Role(RoleType.ADMIN), new Role(RoleType.USER));
-        List<Role> roles = List.of( new Role(RoleType.USER));
-        return new User(userName, user.getPassword(), roles);
+//        List<Role> roles = List.of( new Role(RoleType.USER));
+        return user;
 
     }
 }

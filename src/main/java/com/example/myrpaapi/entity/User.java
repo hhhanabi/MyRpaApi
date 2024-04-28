@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class User extends Model<User> {
     @TableId(type = IdType.AUTO)
+    private Integer id;
     private String username;
     private String password;
     @TableField(exist = false)

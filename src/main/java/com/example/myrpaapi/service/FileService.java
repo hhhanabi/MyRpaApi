@@ -1,6 +1,7 @@
 package com.example.myrpaapi.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.myrpaapi.constant.ResultJson;
 import com.example.myrpaapi.entity.File;
 
 /**
@@ -11,5 +12,6 @@ import com.example.myrpaapi.entity.File;
  */
 public interface FileService extends IService<File> {
 
+    ResultJson<?> deleteFileByID(String id);
 }
 

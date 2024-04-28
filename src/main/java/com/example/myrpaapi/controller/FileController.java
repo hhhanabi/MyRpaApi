@@ -5,6 +5,7 @@ import com.example.myrpaapi.entity.File;
 import com.example.myrpaapi.service.FileService;
 import com.example.myrpaapi.util.FileUtil;
 import jakarta.annotation.Resource;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,7 +33,10 @@ public class FileController {
         FileUtil.saveMultiFile("D:/upload/"+folderName, file);
         return ResultJson.ok();
     }
-
+    @DeleteMapping
+    public ResultJson<?> deleteFile(String id) {
+        return fileService.deleteFileByID(id);
+    }
     @GetMapping
     public ResultJson<?> getAll() {
         return ResultJson.ok(fileService.list());
