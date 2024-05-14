@@ -25,5 +25,7 @@ public class File extends Model<File> {
 
     private String name;
 
+    private Integer user_id;
+
 }
 

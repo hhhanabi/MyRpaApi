@@ -32,4 +32,11 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
         return user;
 
     }
+
+    @Override
+    public Integer selectIDByName(String userName) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(User::getUsername,userName);
+        return this.getOne(wrapper).getId();
+    }
 }

@@ -19,18 +19,18 @@ public class FileController {
     FileService fileService;
 
     @PostMapping("/upload")
-    public ResultJson<?> uploadFolder(@RequestParam("folderName") String folderName,MultipartFile file) throws IOException {
-        String originalFileName = file.getOriginalFilename();
-        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+    public ResultJson<?> uploadFolder(@RequestParam("folderName") String folderName,@RequestParam("fileName") String fileName,MultipartFile file) throws IOException {
+        String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
         if(fileExtension.equals("txt")) {
-            String fileContent = new String(file.getBytes(), StandardCharsets.UTF_8);
+            byte[] bytes = file.getBytes();
+            String fileContent = new String(bytes, StandardCharsets.UTF_8);
             File dbFile = new File();
             dbFile.setUrl(folderName);
             dbFile.setDescription(fileContent);
             dbFile.setName(folderName);
             fileService.save(dbFile);
         }
-        FileUtil.saveMultiFile("D:/upload/"+folderName, file);
+        FileUtil.saveMultiFile("D:/upload/"+folderName,fileName, file);
         return ResultJson.ok();
     }
     @DeleteMapping

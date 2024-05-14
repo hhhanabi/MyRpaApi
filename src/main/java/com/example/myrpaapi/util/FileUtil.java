@@ -5,11 +5,11 @@ import java.io.IOException;
 
 import org.springframework.web.multipart.MultipartFile;
 public class FileUtil {
-    public static void saveMultiFile(String basePath, MultipartFile file) {
+    public static void saveMultiFile(String basePath,String fileName, MultipartFile file) {
         if (basePath.endsWith("/")) {
             basePath = basePath.substring(0, basePath.length() - 1);
         }
-            String filePath = basePath + "/" + file.getOriginalFilename();
+            String filePath = basePath + "/" + fileName;
             makeDir(filePath);
             File dest = new File(filePath);
             try {
